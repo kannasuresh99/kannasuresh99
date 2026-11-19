@@ -13,31 +13,31 @@ The LLM extracts. Deterministic checks validate. A human approves. Every output 
 
 [LinkedIn](https://www.linkedin.com/in/kannappan-suresh-kannan99) · [GitHub](https://github.com/kannasuresh99)
 
-### Built from the base up
+### Not if-else. Intelligence.
 
-I design the whole system, not only the prompt: from the cluster at the bottom to the controls at the top that make AI output trustworthy. Each color is one layer, and it keeps that meaning in every diagram on this page.
+I don't wire workflows out of if-else branches that break on the case nobody wrote. I put a model in the loop that reads each case, decides what to do, checks its own work, and hands off to a person when it isn't sure.
 
 <picture>
-  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/stack-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/stack.svg" width="100%" alt="Layered architecture stack, built from the bottom up. 1 Infrastructure: Azure AKS, GCP Vertex AI, AWS, Kubernetes, Docker, Terraform; pattern: pod auto-scaling. 2 Data stores: PostgreSQL, MongoDB, Redis, Neo4j, LanceDB; patterns: knowledge graph, optimized indexing. 3 Messaging and queues: Azure Service Bus, Kafka, Celery; patterns: shuffle-sharding, outbox, idempotent consumers. 4 Services and APIs: FastAPI, Flask, Django, gRPC and REST; patterns: event-driven microservices, multi-tenant isolation, permission-aware access. 5 Retrieval: embeddings, hybrid search, re-ranking, OCR chunking; patterns: graph-RAG, content-hash cache. 6 Agents: LangGraph, LangChain, Pipecat, Gemini, Azure OpenAI; patterns: multi-agent orchestration, micro-prompting, context caching, thinking budgets. 7 Trust and controls: deterministic validation, human-in-the-loop, audit trails, provenance, 21 CFR Part 11 / GxP. Two rails run alongside: observability (metrics, structured logs, tracing, token cost and latency) across every layer, and evals (gold-set harness, LLM-as-judge) across retrieval, agents, and trust and controls.">
+  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/agentic-narrow.svg">
+  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/agentic.svg" width="100%" alt="Two panels compare a hard-coded workflow with intelligence in the workflow. Left, in grey: four incoming documents, a clean one, a scanned one, a new format and an amended one, enter an if, elif, else decision tree. The clean one takes its branch; the new format falls through to a dead end, no rule matched, manual. Every new case is another branch, and it breaks on the case nobody wrote. Right: the same four documents enter a loop around a violet model core: understand what this is and what is being asked, plan the steps and tools, act by extracting, looking up and comparing, and check against the source. All four are handled; a low-confidence case goes to an azure human-review gate and comes back approved. It reasons about each case, and rules become guardrails, not the logic. Footer: deterministic where it must be, validation, permissions and audit; intelligent everywhere else.">
 </picture>
 
-### How I build large-document pipelines
+### Intelligence inside large-document workflows
 
-The LLM is one stage. Everything around it exists to give it the right context, check its work, and show where each answer came from.
+Long, regulated documents. At every step the model makes a judgment, and every judgment is verified, cited to its page, and measured.
 
 <picture>
-  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/pipeline-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/pipeline.svg" width="100%" alt="Large-document pipeline in three lanes plus an eval loop. Ingest path: long PDFs enter an ingest service (FastAPI), wait in a tenant-fair queue, pass a content-hash cache where seen content is reused and skips ahead, then go through OCR and long-document chunking, then embedding and graph linking into a shared knowledge graph and vector layer. Answer path: hybrid and graph search over that knowledge, re-ranking, LLM extraction by agents with batch inference, deterministic validation, a human review and approval gate, and finally cited, page-anchored output written to an audit trail (source page, extracted, validated, approved; 21 CFR Part 11). Eval loop: a gold-set harness and an LLM-as-judge score the output and feed back to tune retrieval and the model; a gauge shows extraction accuracy rising from ~70% to ~90%.">
+  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/docflow-narrow.svg">
+  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/docflow.svg" width="100%" alt="A large-document workflow and where the intelligence sits in it. A thick stack of long regulated documents enters from the left and moves through five steps on one lane, each with a violet callout giving the question the model answers there. Read: what is this document, which parts matter? Find: where is the evidence for this field? Extract: what does it actually say? Each value stays tied to its page. Verify: does it agree with the rest of the document? Rules act as guardrails. Decide: sure enough to ship? If yes, a structured, page-cited result; if not sure, a human reviewer checks it and the correction flows back. Underneath, a mint measurement loop: every change is measured against a gold set, and a gauge shows extraction accuracy rising from ~70% to ~90%.">
 </picture>
 
-### Agentic systems I've built
+### Use cases I've solved
 
-How they work, and what they changed.
+What the agents do, and what changed.
 
 <picture>
-  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/agents-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/agents.svg" width="100%" alt="Five agentic systems as diagram cards. 1. Agent framework (Enegma, LangGraph): one framework core with lifecycle, memory, tools and orchestration modules produces new agents that work together; new-agent development went from weeks to ~1 day. 2. Micro-prompting (Enegma, real-time agents): one big prompt split into 200 to 800-token decomposed prompts; ~5× faster time-to-first-token and ~90% fewer prompt tokens. 3. SOP to AOP (Enegma): a DSL turns a standard operating procedure into an agent execution flow on an agent canvas while core code stays untouched; workflow iteration time cut ~60%. 4. Agents that read code (PayPal, CodexMap): a codebase goes through AST parsing, semantic embeddings and LLM reasoning agents to produce service maps and call graphs; architectural analysis cut ~60% and dependency discovery cut ~70%. Alongside it, Venmo's 9-month manual service-decomposition process became an agentic workflow, and the monolith-to-microservices migration ran ~30% faster. 5. Document to computable model (side-project pattern): a long spec document becomes a structured, computable model; drafting agents generate forms, specs and mappings; a human approves before anything goes live; amendments are detected and propagated to every dependent artifact; questions to the document are answered with section citations. AI drafts, humans approve.">
+  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/usecases-narrow.svg">
+  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/usecases.svg" width="100%" alt="Six use cases solved with agents, each tile read top to bottom as where, problem, what the agent does and result. 1. Shipping new agents at Enegma: every new agent was built from scratch; a reusable agent framework with memory, tools and multi-agent orchestration built in; weeks to ~1 day per new agent. 2. Changing agent behaviour at Enegma: every behaviour change meant a code change; written procedures (SOPs) become agent execution flows on a canvas, so core code stays untouched; ~60% faster workflow iteration. 3. Real-time agents at Enegma: slow first token; one big prompt split into small, focused prompts (micro-prompting); ~5× faster first token and ~90% fewer prompt tokens. 4. Understanding a large codebase at PayPal: engineers mapped services and dependencies by hand; agents read the code and draw service maps and call graphs; architectural-analysis time down 60% and dependency discovery down 70%. 5. Breaking up a monolith at PayPal (Venmo): a 9-month manual service-decomposition process; an agentic workflow does the decomposition; ~30% faster monolith-to-microservices migration. 6. Turning a long spec into working artifacts, a pattern I build with: forms, specs and mappings hand-built from a long document; the document becomes a structured, computable model, agents draft each artifact, amendments propagate to everything that depends on them, and every answer cites its section; AI drafts, humans approve.">
 </picture>
 
 ### How I work a problem
@@ -46,7 +46,7 @@ Measure first. Find the constraint. Change the system. Prove the result.
 
 <picture>
   <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/cases-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/cases.svg" width="100%" alt="Four problem-solving cases, each read in order as problem, diagnose, move, result: a grey problem tile, a mint diagnosis tile, a move tile in its layer colour and an ivory result tile with the biggest type, each stage marked by a small staircase that gains a step. 1. Retrieval at ValGenesis: extraction at ~70% in a large-document pipeline; a gold-set regression harness, measure before tuning; retrieval over a trace graph with hybrid and graph search plus model optimizations; ~90% extraction accuracy. 2. Messaging at ValGenesis: noisy neighbours, tenants share AI queues; no tenant fairness, one queue for many tenants; a shuffle-sharded queue with idempotent consumers and an outbox on Azure Service Bus; tenant fairness with per-tenant metrics. 3. Agents at Enegma: slow first token for real-time agents; oversized prompts, tokens drive latency; micro-prompting with 200 to 800-token prompts; ~5× faster first token and ~90% fewer prompt tokens. 4. Data at Kissflow: 60M+ records to move from GCS to MongoDB; two hard constraints, zero loss and faster reads; batch processing and optimized indexing; zero data loss, 15% ahead of schedule, retrieval time down 40%.">
+  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/cases.svg" width="100%" alt="Three problem-solving cases, each read in order as problem, diagnose, move, result: a grey problem tile, a mint diagnosis tile, a move tile in its colour and an ivory result tile with the biggest type, each stage marked by a small staircase that gains a step. 1. Accuracy at ValGenesis: extraction stuck at ~70% on long regulated documents; a gold-set regression harness, measure before tuning; rebuilt evidence retrieval plus targeted model tuning; ~90% extraction accuracy. 2. Data at Kissflow: 60M+ records to move from GCS to MongoDB; two hard constraints, zero loss and faster reads; batch processing and optimized indexing; zero data loss, 15% ahead of schedule, retrieval time down 40%. 3. Backend at Saama: slow REST APIs on two clinical SaaS products; profiled the hot paths in queries and the data model; query optimization and data modeling; +20% API efficiency.">
 </picture>
 
 ### Where I've shipped
@@ -55,7 +55,7 @@ Each role added a layer: backend and data first, then retrieval and agents, and 
 
 <picture>
   <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/journey-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/journey.svg" width="100%" alt="Career staircase from 2021 to now: five evenly spaced steps, oldest to newest, each a tower of glass layers that grows by one layer per role, capped in the colour of the layer that role built most and carrying that layer's small scene from the stack. One line joins the steps and shifts colour from rose to tangerine, orchid, violet and azure, with a phrase at each stop: backend, data at scale, agentic RAG, agent platforms, regulated AI. Saama, Software Engineer, 2021–2023, clinical SaaS, API efficiency +20%. Kissflow, Software Engineer, 2024, no-code platform, 60M+ records, zero loss, flagged where LLMs enter. PayPal, Software Engineer 2, 2024–2025, code intelligence, migration ~30% faster. Enegma, Founding team, 2025–2026, agent platform, weeks to ~1 day. ValGenesis, Senior SWE, AI/ML, 2026 to now, GxP document AI, ~70% to ~90%, ringed as now.">
+  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/journey.svg" width="100%" alt="Career staircase from 2021 to now: five evenly spaced steps, oldest to newest, each a tower of glass layers that grows by one layer per role, capped in the colour of the layer that role built most and carrying a small scene of what that role built. One line joins the steps and shifts colour from rose to tangerine, orchid, violet and azure, with a phrase at each stop: backend, data at scale, agentic RAG, agent platforms, regulated AI. Saama, Software Engineer, 2021–2023, clinical SaaS, API efficiency +20%. Kissflow, Software Engineer, 2024, no-code platform, 60M+ records, zero loss, flagged where LLMs enter. PayPal, Software Engineer 2, 2024–2025, code intelligence, migration ~30% faster. Enegma, Founding team, 2025–2026, agent platform, weeks to ~1 day. ValGenesis, Senior SWE, AI/ML, 2026 to now, GxP document AI, ~70% to ~90%, ringed as now.">
 </picture>
 
 <details>
@@ -64,9 +64,9 @@ Each role added a layer: backend and data first, then retrieval and agents, and 
 Agentic document-intelligence services for a GxP-regulated validation platform (pharma / life sciences).
 
 - Pair LLM extraction with deterministic validation and human-in-the-loop gates on multi-tenant, permission-aware processing, so every AI output stays traceable and audit-ready (21 CFR Part 11).
-- Raised extraction accuracy of a large-document pipeline from ~70% to ~90%, measured against a gold-set regression harness, by re-architecting retrieval over a trace graph with hybrid and graph-based search plus targeted model optimizations.
-- Designed and built an organization-wide knowledge-graph system on Neo4j that unifies entity and dependency context to power graph-RAG retrieval across AI services.
-- Designed a shared queuing service on Azure Service Bus for AI workloads (shuffle-sharding, idempotent consumers, outbox pattern) that brought tenant fairness to multi-tenant systems, instrumented with per-tenant throughput and latency metrics.
+- Raised extraction accuracy of a large-document pipeline from ~70% to ~90%, measured against a gold-set regression harness.
+- Built an organization-wide knowledge layer that gives every AI service shared, grounded context.
+- Brought tenant fairness to shared AI workloads across multi-tenant systems, with per-tenant throughput and latency metrics.
 - Cut LLM inference cost and latency with context caching, batch processing and thinking-budget tuning, tracked by token-level cost and latency observability.
 - Wrote engineering guidelines for using AI coding tools responsibly (review discipline, test coverage, and keeping design judgment with the engineer) and ran the internal rollout to other teams.
 
@@ -127,10 +127,3 @@ Agentic document-intelligence services for a GxP-regulated validation platform (
 **Awards** · 4× Shining Star Award (monthly best performer), Saama Technologies · INSPIRE Science Camp, Govt. of India (top 200 nationally)
 
 [LinkedIn](https://www.linkedin.com/in/kannappan-suresh-kannan99) · [GitHub](https://github.com/kannasuresh99)
-
-<picture>
-  <source media="(max-width: 1011px)" srcset="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/footer-narrow.svg">
-  <img src="https://raw.githubusercontent.com/kannasuresh99/kannasuresh99/main/assets/footer.svg" width="100%" alt="Two systems mirrored across three shared verbs. Left: a chemical reactor with a gauge (measure), a valve (control) and a chart recorder (prove), captioned Chemical Engineering, 2016–2020. Right: an LLM core with an eval harness (measure), validation and a human gate (control) and an audit trail (prove), captioned Production AI, today.">
-</picture>
-
-<p align="right"><i>Same discipline. New reactor.</i></p>

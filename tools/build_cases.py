@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scene 5, 'How I work a problem': four problem -> diagnose -> move -> result strips.
+"""Scene 5, 'How I work a problem': three problem -> diagnose -> move -> result strips.
 
 Writes assets/cases.svg (850 wide) and assets/cases-narrow.svg (400 wide) from the shared svgkit.
 Python 3 stdlib only, deterministic. Never hand-edit the SVGs; change this file and re-run.
@@ -20,46 +20,38 @@ COLS = ("PROBLEM", "DIAGNOSE", "MOVE", "RESULT")
 # key, tag word, employer, [(title, [subs]) x 3], (result text, result kind, [context lines])
 # Every word and number is from the resume (scene 5 facts); each strip stays inside one employer.
 CASES = [
-    ("RETR", "RETRIEVAL", "ValGenesis",
-     [("Extraction at ~70%", ["large-document pipeline"]),
+    ("RETR", "ACCURACY", "ValGenesis",
+     [("Extraction stuck at ~70%", ["long regulated documents"]),
       ("Gold-set regression harness", ["measure before tuning"]),
-      ("Retrieval over trace graph", ["hybrid + graph search", "model optimizations"])],
+      ("Rebuilt evidence retrieval", ["plus targeted model tuning"])],
      ("~90%", "num", ["extraction accuracy"])),
-    ("MSG", "MESSAGING", "ValGenesis",
-     [("Noisy neighbours", ["tenants share AI queues"]),
-      ("No tenant fairness", ["one queue, many tenants"]),
-      ("Shuffle-sharded queue", ["idempotent consumers · outbox", "Azure Service Bus"])],
-     ("Tenant fairness", "word", ["per-tenant metrics"])),
-    ("AGENT", "AGENTS", "Enegma",
-     [("Slow first token", ["real-time agents"]),
-      ("Oversized prompts", ["tokens drive latency"]),
-      ("Micro-prompting", ["200 to 800-token prompts"])],
-     ("~5×", "num", ["faster first token", "~90% fewer prompt tokens"])),
     ("DATA", "DATA", "Kissflow",
      [("60M+ records to move", ["GCS → MongoDB"]),
       ("Zero loss, faster reads", ["two hard constraints"]),
       ("Batch + optimized indexing", ["batch processing"])],
      ("Zero data loss", "word", ["15% ahead of schedule", "retrieval time −40%"])),
+    ("SVC", "BACKEND", "Saama",
+     [("Slow REST APIs", ["two clinical SaaS products"]),
+      ("Profiled the hot paths", ["queries and data model"]),
+      ("Query optimization", ["data modeling"])],
+     ("+20%", "num", ["API efficiency"])),
 ]
-LIT = ("DATA", "MSG", "RETR", "AGENT")
+LIT = ("SVC", "DATA", "RETR")
 
 TITLE = "How I work a problem"
-ALT = ("Four problem-solving cases, each read in order as problem, diagnose, move, result: a grey problem tile, a "
-       "mint diagnosis tile, a move tile in its layer colour and an ivory result tile with the biggest type, each "
-       "stage marked by a small staircase that gains a step. 1. Retrieval at ValGenesis: extraction at ~70% in a "
-       "large-document pipeline; a gold-set regression harness, measure before tuning; retrieval over a trace graph "
-       "with hybrid and graph search plus model optimizations; ~90% extraction accuracy. 2. Messaging at ValGenesis: "
-       "noisy neighbours, tenants share AI queues; no tenant fairness, one queue for many tenants; a shuffle-sharded "
-       "queue with idempotent consumers and an outbox on Azure Service Bus; tenant fairness with per-tenant metrics. "
-       "3. Agents at Enegma: slow first token for real-time agents; oversized prompts, tokens drive latency; "
-       "micro-prompting with 200 to 800-token prompts; ~5× faster first token and ~90% fewer prompt tokens. "
-       "4. Data at Kissflow: 60M+ records to move from GCS to MongoDB; two hard constraints, zero loss and faster "
-       "reads; batch processing and optimized indexing; zero data loss, 15% ahead of schedule, retrieval time "
-       "down 40%.")
-DESC = ("Four problem, diagnose, move, result strips rising left to right: retrieval and messaging at ValGenesis, "
-        "agents at Enegma, data at Kissflow, each ending in its measured result.")
-DESC_NARROW = ("Four stacked cards, each reading problem, diagnose, move, result from top to bottom, for retrieval, "
-               "messaging, agents and data, each ending in its measured result.")
+ALT = ("Three problem-solving cases, each read in order as problem, diagnose, move, result: a grey problem tile, a "
+       "mint diagnosis tile, a move tile in its colour and an ivory result tile with the biggest type, each stage "
+       "marked by a small staircase that gains a step. 1. Accuracy at ValGenesis: extraction stuck at ~70% on long "
+       "regulated documents; a gold-set regression harness, measure before tuning; rebuilt evidence retrieval plus "
+       "targeted model tuning; ~90% extraction accuracy. 2. Data at Kissflow: 60M+ records to move from GCS to "
+       "MongoDB; two hard constraints, zero loss and faster reads; batch processing and optimized indexing; zero data "
+       "loss, 15% ahead of schedule, retrieval time down 40%. 3. Backend at Saama: slow REST APIs on two clinical "
+       "SaaS products; profiled the hot paths in queries and the data model; query optimization and data modeling; "
+       "+20% API efficiency.")
+DESC = ("Three problem, diagnose, move, result strips rising left to right: accuracy at ValGenesis, data at Kissflow "
+        "and backend at Saama, each ending in its measured result.")
+DESC_NARROW = ("Three stacked cards, each reading problem, diagnose, move, result from top to bottom, for accuracy, "
+               "data and backend, each ending in its measured result.")
 
 CYCLE, LOOP0, STAGGER = 12, 2.3, 1.5     # one pulse per strip, strips 1.5 s apart, loop starts after the build
 TRAVEL = 1.15                            # seconds for a pulse to run PROBLEM -> RESULT
@@ -182,7 +174,7 @@ def path_pcts(points, travel_pct):
 
 # ---------------------------------------------------------------- wide
 def build_wide():
-    """850-wide card: header row, four rising strips of four tiles, a stepped track and a pulse per strip."""
+    """850-wide card: header row, rising strips of four tiles, a stepped track and a pulse per strip."""
     W, Y0, BAND, GAP, RISE, TW, TH = 850, 88, 118, 14, 6, 160, 100
     XS = (144, 316, 488, 660)                   # 160-wide tiles, 12 px gaps; margins 26 left (tag) / 30 right
     PADL, PADR = 9, 7
@@ -193,7 +185,7 @@ def build_wide():
     gl, _, gh4 = stairs_extent(4)
     # the tallest glyph pops gh4 - GB px above its tile; keep >= 10 px from the strip above
     K.assert_within(gh4 - GB + 10, GAP + (BAND - TH), "staircase glyph clearance to the strip above")
-    H = Y0 + 4 * BAND + 3 * GAP + 26
+    H = Y0 + len(CASES) * BAND + (len(CASES) - 1) * GAP + 26
     css_title = (".tl{font-size:12.5px;font-weight:650}")
     body = [K.card(W, H, "PROBLEM → RESULT", lit=LIT)]
 
@@ -288,7 +280,7 @@ def build_wide():
 
 # ---------------------------------------------------------------- narrow
 def build_narrow():
-    """400-wide re-layout: four stacked cards, each a vertical stepper (column word, rail, tile) top to bottom."""
+    """400-wide re-layout: stacked cards, each a vertical stepper (column word, rail, tile) top to bottom."""
     W, CX0, CX1 = 400, 14, 386
     COLX, RAILX, TX0, TX1 = 26, 107, 115, 372
     PADL = 12

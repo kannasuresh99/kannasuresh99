@@ -31,12 +31,12 @@ STOPS = [
      ["~70% → ~90%"], ["~70% → ~90%"]),
 ]
 LIT = ("SVC", "DATA", "RETR", "AGENT", "TRUST")
-KICKER = "CAREER · CLIMBING THE STACK"
+KICKER = "CAREER · 2021 TO NOW"
 
 TITLE = "Where I've shipped"
 ALT = ("Career staircase from 2021 to now: five evenly spaced steps, oldest to newest, each a tower of glass "
        "layers that grows by one layer per role, capped in the colour of the layer that role built most and "
-       "carrying that layer's small scene from the stack. One line joins the steps and shifts colour from rose "
+       "carrying a small scene of what that role built. One line joins the steps and shifts colour from rose "
        "to tangerine, orchid, violet and azure, with a phrase at each stop: backend, data at scale, agentic RAG, "
        "agent platforms, regulated AI. Saama, Software Engineer, "
        "2021–2023, clinical SaaS, API efficiency +20%. Kissflow, Software Engineer, 2024, no-code platform, 60M+ "
