@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 252" width="850" height="252" role="img">
+<title>Engineering drawing title block: drawn by Kannappan Suresh; discipline, Chemical Engineering; Anna University (ACT Campus), 2016&#8211;2020; awards, 4x Shining Star and INSPIRE Science Camp; sheet 1 of 1.</title>
+<defs><linearGradient id="tb-fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="40"><stop offset="0" stop-color="#8c959f" stop-opacity="0"/><stop offset="1" stop-color="#8c959f"/></linearGradient></defs>
+<g fill="none" stroke-linecap="round">
+<path d="M8 0V244H842V0" stroke="url(#tb-fade)" stroke-width="0.75"/>
+<path d="M36 0V216H814V0" stroke="url(#tb-fade)" stroke-width="1.5"/>
+<path d="M230.5 216V244M425 216V244M619.5 216V244M8 136H36M814 136H842M484 60V112M720 60V112M294 112H814M294 164H814" stroke="#8c959f" stroke-width="0.75"/>
+<path d="M294 216V60H814" stroke="#8c959f" stroke-width="1.5"/>
+</g>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">
+<g font-size="14" fill="#8c959f" text-anchor="middle">
+<text x="133" y="235">1</text>
+<text x="328" y="235">2</text>
+<text x="522" y="235">3</text>
+<text x="717" y="235">4</text>
+<text x="22" y="101">C</text>
+<text x="828" y="101">C</text>
+<text x="22" y="181">D</text>
+<text x="828" y="181">D</text>
+</g>
+<g font-size="14" fill="#8c959f" letter-spacing="1.12">
+<text x="306" y="80">DRAWN BY</text>
+<text x="496" y="80">DISCIPLINE</text>
+<text x="732" y="80">SHEET</text>
+<text x="306" y="132">INSTITUTION</text>
+<text x="306" y="184">AWARDS</text>
+</g>
+<g font-size="16" fill="#6e7781">
+<text x="306" y="102" font-weight="600">Kannappan Suresh</text>
+<text x="496" y="102">Chemical Engineering</text>
+<text x="732" y="102">1 OF 1</text>
+<text x="306" y="154">Anna University (ACT Campus), 2016&#8211;2020</text>
+<text x="306" y="206">4x Shining Star &#183; INSPIRE Science Camp</text>
+</g>
+</g>
+</svg>

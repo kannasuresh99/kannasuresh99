@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="660" viewBox="0 0 400 660" role="img" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">
+<title>Process schematic: a noisy, probabilistic signal from an LLM passes through deterministic validation (a control loop), then through a human-in-the-loop gate, and comes out as a clean record written to an audit trail (extracted, validated, reviewed; 21 CFR Part 11). A gauge labeled yield shows gap-assessment extraction accuracy rising from ~70% to ~90%, measured against a gold-set harness.</title>
+<style>
+#noise,#loop,#validated,#clean,#check-1,#check-2,#check-3{stroke-dasharray:1}
+#noise{animation:draw .8s linear backwards}
+#loop{animation:draw .8s ease-out .8s backwards}
+#loop-head{animation:show .15s linear 1.45s backwards}
+#validated{animation:draw .4s ease-out 1.2s backwards}
+#valve-fill{animation:solid .6s cubic-bezier(.45,0,.55,1) 1.6s backwards}
+#valve-lever{animation:closed .6s cubic-bezier(.45,0,.55,1) 1.6s backwards}
+#clean{animation:draw 1s ease-out 2.2s backwards}
+#clean-head{animation:show .1s linear 3.1s backwards}
+#check-1{animation:draw .2s ease-out 3s backwards}
+#check-2{animation:draw .2s ease-out 3.3s backwards}
+#check-3{animation:draw .2s ease-out 3.6s backwards}
+#needle-live{animation:at70 3s cubic-bezier(.22,1,.36,1) .8s backwards}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes show{from{opacity:0}}
+@keyframes solid{from{opacity:1}}
+@keyframes closed{from{transform:rotate(-90deg)}}
+@keyframes at70{from{transform:rotate(-48deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<defs><linearGradient id="fade" gradientUnits="userSpaceOnUse" x1="0" y1="620" x2="0" y2="660"><stop offset="0" stop-color="#818b98"/><stop offset="1" stop-color="#818b98" stop-opacity="0"/></linearGradient></defs>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path id="trim" d="M6 660L6 6L394 6L394 660" stroke="url(#fade)" stroke-width=".75"/>
+<path id="frame" d="M24 660L24 24L376 24L376 660" stroke="url(#fade)" stroke-width="1.5"/>
+<path id="zone-ticks" d="M112 6L112 24M200 6L200 24M288 6L288 24M6 360L24 360M376 360L394 360" stroke="#818b98" stroke-width=".75"/>
+<path id="header-rule" d="M24 86L376 86" stroke="#818b98" stroke-width=".75"/>
+<path id="ledger-rules" d="M44 446L176 446M44 474L176 474M44 502L176 502" stroke="#818b98" stroke-width=".75"/>
+<path id="tap" d="M110 395L310 395L310 434" stroke="#818b98" stroke-dasharray="3 3"/>
+<path id="gauge-ticks" d="M276.23 499.5A39 39 0 1 1 343.77 499.5M276.23 499.5L279.69 497.5M271.21 484.08L275.19 483.66M272.91 467.95L276.71 469.18M281.02 453.9L283.99 456.58M294.14 444.37L295.76 448.03M310 441L310 445M325.86 444.37L324.24 448.03M347.09 467.95L343.29 469.18M343.77 499.5L340.31 497.5" stroke="#59636e"/>
+<path id="gauge-marks" d="M338.98 453.9L333.04 459.26M348.79 484.08L340.83 483.24" stroke="#59636e" stroke-width="1.5"/>
+<path id="valve-fill" d="M96 338L110 356L124 338ZM96 374L110 356L124 374Z" fill="#1f2328" opacity="0"/>
+<g stroke="#1f2328" stroke-width="1.5">
+<rect id="vessel" x="74" y="104" width="72" height="84" rx="36" ry="18"/>
+<path id="nozzle" d="M110 188L110 196"/>
+<rect id="station" x="44" y="268" width="132" height="52" rx="4"/>
+<path id="valve" d="M96 338L110 356L124 338ZM96 374L110 356L124 374Z"/>
+<path id="valve-stem" d="M110 356L82 356"/>
+<rect id="ledger" x="44" y="416" width="132" height="114" rx="2"/>
+<circle id="gauge" cx="310" cy="480" r="46"/>
+<g transform="translate(82 356) rotate(90) scale(1 -1)"><g id="valve-lever"><path d="M0 0H22"/></g></g>
+</g>
+<path id="noise" d="M110 196L112.32 198.09L110.4 200.32L108 202.19L109.28 203.99L112 205.65L112.96 208.24L108.32 209.75L107.2 211.05L117.12 212.56L116.88 214L102 215.58L110.24 217.02L109.84 218.32L109.68 219.9L108 221.42L116.88 223.36L117.84 224.73L103.6 225.95L107.12 227.32L111.52 229.19L110.96 230.85L112.96 233.01L117.44 235.31L110.96 236.97L110.48 238.19L108.08 240.35L109.44 242.58L112 244.24L113.28 246.33L112.16 247.84L110.8 250.29L102.8 252.59L107.44 254.82L109.2 257.27L108.32 258.71L108.72 260.58L108.88 262.74L110.8 265.05L109.52 266.7L110 268" pathLength="1" stroke="#59636e" stroke-width="1.5"/>
+<path id="loop" d="M176 294L330 294L330 132L153.75 132" pathLength="1" stroke="#1f2328" stroke-width="1.25"/>
+<path id="validated" d="M110 320L110 338" pathLength="1" stroke="#1f2328" stroke-width="2"/>
+<path id="clean" d="M110 374L110 406.25" pathLength="1" stroke="#1a7f37" stroke-width="2.5"/>
+<g stroke="#1a7f37" stroke-width="2">
+<path id="check-1" d="M150 460L154.32 464.5L162 455.5" pathLength="1"/>
+<path id="check-2" d="M150 488L154.32 492.5L162 483.5" pathLength="1"/>
+<path id="check-3" d="M150 516L154.32 520.5L162 511.5" pathLength="1"/>
+</g>
+<g transform="translate(310 480) rotate(48)"><g id="needle-ghost"><path d="M0 5V-34" stroke="#59636e" stroke-width="1.5"/></g></g>
+<g transform="translate(310 480) rotate(96)"><g id="needle-live"><path d="M0 5V-34" stroke="#1a7f37" stroke-width="2.5"/></g></g>
+</g>
+<path id="loop-head" d="M146.75 132L154.75 128.88L154.75 135.12Z" fill="#1f2328"/>
+<path id="clean-head" d="M110 415.25L106 405.25L114 405.25Z" fill="#1a7f37"/>
+<circle id="lever-pivot" cx="82" cy="356" r="2.25" fill="#1f2328"/>
+<circle id="gauge-pivot" cx="310" cy="480" r="3" fill="#1f2328"/>
+<g fill="#59636e" font-size="12" text-anchor="middle"><text x="68" y="19">1</text><text x="156" y="19">2</text><text x="244" y="19">3</text><text x="332" y="19">4</text><text x="15" y="204.2">A</text><text x="385" y="204.2">A</text><text x="15" y="524.2">B</text><text x="385" y="524.2">B</text></g>
+<text x="44" y="50" fill="#1f2328" font-size="15" letter-spacing="0.9"><tspan font-weight="600">KANNAPPAN SURESH</tspan></text>
+<text x="356" y="50" text-anchor="end" fill="#59636e" font-size="14" letter-spacing="0.84">CHENNAI, INDIA</text>
+<text x="44" y="72" fill="#1f2328" font-size="14" letter-spacing="0.84">BACKEND &amp; AI ENGINEER</text>
+<g fill="#59636e" font-size="14">
+<text x="162" y="153">reactor</text>
+<text x="134" y="237">probabilistic</text>
+<text x="238" y="121" text-anchor="middle">control loop</text>
+<text x="110" y="552" text-anchor="middle">21 CFR Part 11</text>
+<text x="356" y="580" text-anchor="end">gap-assessment extraction accuracy</text>
+<text x="356" y="600" text-anchor="end">gold-set harness</text>
+</g>
+<g fill="#1f2328" font-size="15" font-weight="600">
+<text x="110" y="290" text-anchor="middle">deterministic</text>
+<text x="110" y="310" text-anchor="middle">validation</text>
+<text x="142" y="352">human-in-the-loop</text>
+<text x="142" y="372">gate</text>
+<text x="56" y="436">audit trail</text>
+<text x="310" y="508" text-anchor="middle">yield</text>
+</g>
+<g fill="#1f2328" font-size="15">
+<text x="56" y="466">extracted</text>
+<text x="56" y="494">validated</text>
+<text x="56" y="522">reviewed</text>
+</g>
+<text x="110" y="153" text-anchor="middle" fill="#1f2328" font-size="20" font-weight="700">LLM</text>
+<text x="356" y="552" text-anchor="end" fill="#1f2328" font-size="18" font-weight="600" style="font-variant-numeric:tabular-nums">~70% &#8594; ~90%</text>
+</svg>
